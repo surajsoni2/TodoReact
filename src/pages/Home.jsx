@@ -4,7 +4,6 @@ import { Context, server } from '../main'
 import { toast } from 'react-hot-toast'
 import Task from '../components/Task'
 import { Navigate } from 'react-router-dom'
-import Welcome from '../components/Welcome'
 
 const Home = () => {
   
@@ -14,9 +13,7 @@ const Home = () => {
   const [tasks, setTasks] = useState([])
   const [refresh, setRefresh] = useState(false)
   const { isAuthenticated } = useContext(Context);
-  
-  if(!isAuthenticated) return <Welcome />;
-  
+
   const updateHandler = async (id)=>{
     try {
     const {data} = await axios.put(`${server}/task/${id}`,
@@ -71,6 +68,7 @@ const Home = () => {
   }
 
   useEffect(()=>{
+    if (isAuthenticated){
     axios.get(`${server}/task/mytask`,{
       withCredentials: true,
     })
@@ -82,9 +80,9 @@ const Home = () => {
       toast.error(error.response.data.message)
     })
   }
-  ,[refresh])
+  },[refresh])
 
-
+  if(!isAuthenticated) return <Navigate to={"/login"} />
   return (
     <div className="container">
       <div className="login">
