@@ -6,6 +6,7 @@ import { createContext, useState } from 'react'
 
 export const server = "https://todo-nodeapp.onrender.com/api/v1"
 
+
 export const Context = createContext({ isAuthenticated: false });
 
 const AppWrapper = () => {

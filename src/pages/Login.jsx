@@ -12,7 +12,6 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true)
-
     try {
       const { data } = await axios.post(
         `${server}/users/login`,
@@ -39,6 +38,7 @@ const Login = () => {
     
     if (isAuthenticated) return <Navigate to={"/"} />
     return (
+
       <div className="login">
       <section>
         <form onSubmit={submitHandler}>

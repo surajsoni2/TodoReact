@@ -57,8 +57,8 @@ const Home = () => {
       })
       setTitle("")
       setDescription("")
-      toast.success(data.message);
       setLoading(false)
+      toast.success(data.message);
       setRefresh(prev=>!prev)
     } catch (error) {
       toast.error(error.response.data.message);
@@ -68,6 +68,7 @@ const Home = () => {
   }
 
   useEffect(()=>{
+    if (isAuthenticated===true){
     axios.get(`${server}/task/mytask`,{
       withCredentials: true,
     })
@@ -78,6 +79,7 @@ const Home = () => {
     .catch((e)=>{
       toast.error(error.response.data.message)
     })
+  }
   },[refresh])
 
   if(!isAuthenticated) return <Navigate to={'/login'} />
