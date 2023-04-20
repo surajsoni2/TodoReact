@@ -4,6 +4,7 @@ import { Context, server } from '../main'
 import { toast } from 'react-hot-toast'
 import Task from '../components/Task'
 import { Navigate } from 'react-router-dom'
+import Welcome from '../components/Welcome'
 
 const Home = () => {
   
@@ -82,7 +83,8 @@ const Home = () => {
   }
   },[refresh])
 
-  if(!isAuthenticated) return <Navigate to={"/login"} />
+  if(!isAuthenticated) return <Welcome />;
+
   return (
     <div className="container">
       <div className="login">

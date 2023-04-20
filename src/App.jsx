@@ -15,7 +15,8 @@ function App() {
   const { setUser, setIsAuthenticated, setLoading,isAuthenticated } = useContext(Context)
   useEffect(() => {
 
-      setLoading(true)
+    if (isAuthenticated){
+    setLoading(true)
       
     axios.get(`${server}/users/me`,
     {
@@ -31,8 +32,9 @@ function App() {
         setIsAuthenticated(false);
         setLoading(false)
       })
+    }
     }, [isAuthenticated])
-    
+
   return (
     <Router>
       <Header />
