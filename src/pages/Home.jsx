@@ -15,10 +15,8 @@ const Home = () => {
   const [refresh, setRefresh] = useState(false)
   const { isAuthenticated } = useContext(Context);
   
-  if(!isAuthenticated){
-    return ( <Welcome /> );
-  } 
-
+  if(!isAuthenticated) return <Welcome />;
+  
   const updateHandler = async (id)=>{
     try {
     const {data} = await axios.put(`${server}/task/${id}`,
@@ -73,7 +71,6 @@ const Home = () => {
   }
 
   useEffect(()=>{
-    if (isAuthenticated===true){
     axios.get(`${server}/task/mytask`,{
       withCredentials: true,
     })
@@ -85,7 +82,7 @@ const Home = () => {
       toast.error(error.response.data.message)
     })
   }
-  },[refresh])
+  ,[refresh])
 
 
   return (
